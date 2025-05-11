@@ -71,6 +71,7 @@ class Driver(object):
         # Gear shifting
         keyboard.on_press_key('q', lambda _: self.shift_gear(-1))
         keyboard.on_press_key('e', lambda _: self.shift_gear(1))
+        keyboard.on_press_key('r', lambda _: self.shift_gear(0))
         
         # Mode toggle
         keyboard.on_press_key('m', lambda _: self.toggle_mode())
@@ -96,10 +97,15 @@ class Driver(object):
 
     def shift_gear(self, direction):
         """Shift gears up or down"""
+        if direction == 0:
+            self.control.setGear(-1)
+            return
         current_gear = self.state.getGear() or 1
         new_gear = current_gear + direction
         if 1 <= new_gear <= 6:  # Only allow valid gears
             self.control.setGear(new_gear)
+        if new_gear < 1 and direction == 1:
+            self.control.setGear(1)
 
     def toggle_mode(self):
         """Toggle between AI and manual control"""
