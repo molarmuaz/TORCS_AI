@@ -29,7 +29,7 @@ class AIDriver:
         
         # Control parameters
         self.steer_lock = 0.785398  # 45 degrees in radians
-        self.steer_sensitivity = 0.5  # Increased steering sensitivity
+        self.steer_sensitivity = 0.7  # Increased steering sensitivity
         self.prev_rpm = None
         self.prev_gear = 1
         
